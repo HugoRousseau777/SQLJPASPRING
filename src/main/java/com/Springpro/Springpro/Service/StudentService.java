@@ -4,7 +4,10 @@ import com.Springpro.Springpro.Entity.Student;
 import com.Springpro.Springpro.Repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,5 +31,17 @@ public class StudentService {
     public Optional<Student> fetchById(int id){
 
         return studentRepository.findById(id);
+    }
+    public Student updateStudent(Student student){
+
+        Optional<Student> updateStudent = studentRepository.findById(student.getId());
+        if(!updateStudent.isPresent()){
+            return null;
+        }
+        Student studentToUpdate = updateStudent.get();
+        studentToUpdate.setMark(student.getMark());
+        studentToUpdate.setName(student.getName());
+        studentRepository.save(studentToUpdate);
+        return studentToUpdate;
     }
 }
