@@ -44,4 +44,14 @@ public class StudentService {
         studentRepository.save(studentToUpdate);
         return studentToUpdate;
     }
+
+    public String deleteStudent(int id){
+        if(studentRepository.existsById(id)) {
+            studentRepository.deleteById(id);
+            return id + "deleted";
+        } else {
+            return "Doesn't exist";
+        }
+
+    }
 }

@@ -24,12 +24,19 @@ public class StudentController {
         return studentService.fetchAll();
     }
     @GetMapping("/fetchById/{id}")
-    public Optional<Student> getById(@PathVariable int id){
+    public Optional<Student> getById(@PathVariable int id) {
         return studentService.fetchById(id);
+
     }
 
     @PutMapping("/changeStudent/{id}")
     public Student updateStudent(@RequestBody Student student){
         return studentService.updateStudent(student);
+    }
+
+    @DeleteMapping("/deleteStudent/{id}")
+    public String deleteStudent(@PathVariable int id){
+
+        return studentService.deleteStudent(id);
     }
 }
